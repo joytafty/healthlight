@@ -50,8 +50,8 @@ def stream():
     for i, tweet in enumerate(twitter.statuses.sample()):
         if 'text' in tweet:
             for word in tweet['text'].encode('utf-8').split():
-                if word not in stop_words:
-                    redis.zincrby('count', word, 1)
+                # if word not in stop_words:
+                #     redis.zincrby('count', word, 1)
             print '%.f (%i); %.f' % (i / (time.clock()-start), i, i / (time.clock() - start) * 3600 * 24 / 1e6)
 
 t = thread.start_new_thread(stream, ())
