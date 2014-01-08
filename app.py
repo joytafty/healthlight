@@ -7,7 +7,7 @@ import nltk
 import logging
 import re
 import random
-from redis import Redis
+from redis import Redis, from_url
 import thread
 import time
 from twitter import OAuth, TwitterStream
@@ -21,7 +21,8 @@ logger = logging.getLogger('log')
 logger.addHandler(logging.FileHandler('log.json'))
 logger.setLevel(logging.INFO)
 
-redis = Redis()
+# redis = Redis()
+redis = from_url(os.getenv('REDISTOGO_URL'))
 
 oauth = OAuth(
     os.getenv('TWITTER_TOKEN'), os.getenv('TWITTER_TOKEN_SECRET'),
